@@ -1,0 +1,25 @@
+<p>
+    bookmarks works!
+</p>
+<div class="album py-5 bg-light" *ngIf="bookmarks">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" *ngFor="let repository of bookmarks; let i=index">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{repository.owner.avatar_url}}" class="bd-placeholder-img card-img-top" width="250"
+                        focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+                    <div class="card-body">
+                        <p class="card-text">{{repository.name}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Add to bookmarks</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Remove from
+                                    bookmarks</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
