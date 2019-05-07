@@ -9,20 +9,23 @@ import { Repository } from '../../models/repository';
 })
 export class BookmarksComponent implements OnInit {
 
-    public bookmarks: any;
+    public bookmarks: Repository[];
 
     constructor(private bookmarksService: BookmarksService) { }
 
     ngOnInit() {
         this.getBookmarks();
-        console.log(this.bookmarks.stringify);
+        console.log(this.bookmarks);
     }
 
     public getBookmarks(): void {
         this.bookmarksService.getBookmarks()
             .then(retrievedData =>{
-                if(retrievedData=="[]") throw new Error("Bookmarks is empty!")
-                this.bookmarks = retrievedData})
+                console.log(retrievedData);
+                // if(!retrievedData) throw new Error("Bookmarks is empty!");
+                // this.bookmarks = retrievedData;
+                // console.log(retrievedData);
+            })
             .catch(reason =>
                 console.log(reason));
     }

@@ -47,6 +47,13 @@ export class SearchComponent implements OnInit {
             .then(
                 retrievedData => {      // this properties update must be synch before buttons re-enabling.
                     this.searchResults = retrievedData;
+                    //  etrievedData.items.forEach((repos,i)=>{
+                    //  this.searchResults.items[i].name = repos.name;
+                    //  this.searchResults.items[i].id = repos.id;
+                    //  this.searchResults.items[i].owner.avatar_url = repos.owner.avatar_url;
+                    //  this.searchResults.items[i].owner.id = repos.owner.id;
+                    //});
+                    this.searchResults.total_count = retrievedData.total_count;
                     this.totalPages = Math.ceil(this.searchResults.total_count / 30);
                     this.previousButtonDisabled = this.currentPage == 1;
                     this.nextButtonDisabled = this.currentPage * 30 >= this.searchResults.total_count;
@@ -85,13 +92,26 @@ export class SearchComponent implements OnInit {
     public getBookmarks(): void {
         this.bookmarksService.getBookmarks()
             .then(retrievedData =>{
-                if(retrievedData=="[]") throw new Error("Bookmarks is empty!")
+                if(!retrievedData) throw new Error("Bookmarks is empty!")
                 this.bookmarks = retrievedData})
             .catch(reason =>
                 console.log(reason));
     }
 
-    public addToBookmarks(id: number): void {
+public addToBookmarks(id:number):void{
+    this.bookmarksService
+    .addBookmark2(this.searchResults.items[id])
+    .then(success=>{
+        console.log(success);
+        this.getBookmarks();
+        console.log(id+"");
+        console.log(this.searchResults.items[0].name);
+        console.log(this.bookmarks);
+    })
+    .catch(reason=>console.log(reason));
+}
+
+    public addToBookmarks2(id: number): void {
         this.bookmarksService
         .addBookmark(this.searchResults.items[id])
         .subscribe();

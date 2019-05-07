@@ -4,7 +4,7 @@ Please install first of all npm, Node & Angular.
 
 ## Reinstalling node packages
 
-Please run nmp install to recover node packages from package.json file.
+Please run npm install to recover node packages from package.json file.
 Before ruuning angular app, please update apiServer at src\app\core\services\bookmarks.service.ts with your api localhost address.
 
 # GithubSearch
